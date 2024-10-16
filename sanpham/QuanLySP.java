@@ -7,18 +7,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+import java.util.Random;
+
 public class QuanLySP {
+    // Biến đếm toàn cục cho mã đơn hàng
+    private static int soThuTuDonHang = 1;
+
     public static void chonQuanLySP(VBox vbox) {
         vbox.getChildren().clear();
         Button btnThemSP = new Button("Thêm Sản Phẩm");
         Button btnSuaSP = new Button("Sửa Sản Phẩm");
         Button btnXoaSP = new Button("Xóa Sản Phẩm");
-        btnThemSP.setOnAction(event -> hienThiGDThemSP(vbox)); 
-        //btnSuaSP.setOnAction(event -> xuLySP("Sửa Sản Phẩm"));
-        //btnXoaSP.setOnAction(event -> xuLySP("Xóa Sản Phẩm"));
+
+        btnThemSP.setOnAction(event -> hienThiGDThemSP(vbox));
 
         vbox.getChildren().addAll(btnThemSP, btnSuaSP, btnXoaSP);
     }
+
     private static void hienThiGDThemSP(VBox vbox) {
         vbox.getChildren().clear();
         Label labelMaSP = new Label("Mã Sản Phẩm:");
@@ -29,23 +34,60 @@ public class QuanLySP {
         TextField txtGiaSP = new TextField();
         Label labelSoLuongSP = new Label("Số Lượng:");
         TextField txtSoLuongSP = new TextField();
+        Label labelMaKH = new Label("Mã Khách Hàng:");
+        TextField txtMaKH = new TextField();
         Button btnLuu = new Button("Lưu");
+        Button btnLuuDH = new Button("Lưu Đơn Hàng");
 
+        // Nút Lưu Sản Phẩm
         btnLuu.setOnAction(event -> {
             String maSP = txtMaSP.getText();
             String tenSP = txtTenSP.getText();
             String giaSP = txtGiaSP.getText();
             String soLuong = txtSoLuongSP.getText();
+            String maKH = txtMaKH.getText();
 
-            if (maSP.isEmpty() || tenSP.isEmpty() || giaSP.isEmpty() || soLuong.isEmpty()) {
+            if (maSP.isEmpty() || tenSP.isEmpty() || giaSP.isEmpty() || soLuong.isEmpty() || maKH.isEmpty()) {
                 showAlert("Nhập không thành công");
             } else {
-                LuuTru.luuThongTinSP(maSP, tenSP, giaSP, soLuong);
+                LuuTruSP.luuThongTinSP(maSP, tenSP, giaSP, soLuong, maKH);
                 showAlert("Nhập thành công!");
-                vbox.getChildren().clear(); 
+                
             }
         });
-        vbox.getChildren().addAll(labelMaSP, txtMaSP, labelTenSP, txtTenSP, labelGiaSP, txtGiaSP, labelSoLuongSP, txtSoLuongSP, btnLuu);
+
+        // Nút Lưu Đơn Hàng
+        btnLuuDH.setOnAction(event -> {
+            vbox.getChildren().clear();
+
+            // Thêm các trường nhập mã đơn hàng và mã khách hàng
+            Label labelMaDH = new Label("Mã Đơn Hàng:");
+            TextField txtMaDH = new TextField();
+            Label labelMaKH_DH = new Label("Mã Khách Hàng:");
+            TextField txtMaKH_DH = new TextField();
+
+            Button btnLuuDonHang = new Button("Lưu Đơn Hàng");
+
+            btnLuuDonHang.setOnAction(e -> {
+                String maDH = txtMaDH.getText();
+                String maKH_DH = txtMaKH_DH.getText();
+             
+                if (maDH.isEmpty() || maKH_DH.isEmpty()) {
+                    showAlert("Vui lòng nhập đầy đủ mã đơn hàng và mã khách hàng");
+                } else {
+                    
+	
+					// Xử lý lưu đơn hàng với mã đơn hàng và mã khách hàng
+                    LuuTru.luuThongTinDH(maDH, maKH_DH);
+                    showAlert("Lưu đơn hàng thành công!\nMã Đơn Hàng: " + maDH + "\nMã Khách Hàng: " + maKH_DH );
+                    vbox.getChildren().clear();
+                }
+            });
+
+            vbox.getChildren().addAll(labelMaDH, txtMaDH, labelMaKH_DH, txtMaKH_DH, btnLuuDonHang);
+        });
+
+        vbox.getChildren().addAll(labelMaSP, txtMaSP, labelTenSP, txtTenSP, labelGiaSP, txtGiaSP, labelSoLuongSP, txtSoLuongSP,labelMaKH, txtMaKH, btnLuu, btnLuuDH);
     }
 
     private static void showAlert(String message) {
@@ -55,5 +97,4 @@ public class QuanLySP {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }
