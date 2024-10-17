@@ -25,11 +25,11 @@ public class LuuTru {
                  
                  // Câu lệnh SQL để thêm đơn hàng
                  PreparedStatement preparedStatement = connection.prepareStatement(
-                         "INSERT INTO donhang (maDH, maKH_DH) VALUES (?, ?)")) {
+                         "INSERT INTO donhang (maDH, maKH) VALUES (?, ?)")) {
 
                 // Đặt giá trị cho các tham số trong câu lệnh SQL
                 preparedStatement.setString(1, maDH);
-                preparedStatement.setString(2, maKH_DH);
+                preparedStatement.setString(2, maKH);
                 // Thực thi câu lệnh và kiểm tra số dòng đã được thêm
                 int rowsInserted = preparedStatement.executeUpdate();
 
