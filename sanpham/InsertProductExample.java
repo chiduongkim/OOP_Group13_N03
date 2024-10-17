@@ -19,19 +19,20 @@ public class InsertProductExample {
                 userName, 
                 password);
              final PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO sanpham (maSP, tenSP, giaSP, soLuong, maKH) VALUES (?, ?, ?, ?, ?)")) {
+                     "INSERT INTO sanpham (maSP, tenSP, giaSP, soLuong) VALUES (?, ?, ?, ?)" )){
 
-
+			
+			String maSP = null;
 			preparedStatement.setString(1, maSP);
-
+			
+			String tenSP = null;
 			preparedStatement.setString(2, tenSP);
-
+			
+			String giaSP = null;
 			preparedStatement.setDouble(3, Double.parseDouble(giaSP));
 
+			String soLuong = null;
 			preparedStatement.setInt(4, Integer.parseInt(soLuong));
-
-			preparedStatement.setString(5, maKH);
-
             int rowsInserted = preparedStatement.executeUpdate();
 
             if (rowsInserted > 0) {
@@ -43,4 +44,3 @@ public class InsertProductExample {
         }
     }
 }
-
