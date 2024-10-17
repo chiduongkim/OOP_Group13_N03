@@ -34,8 +34,6 @@ public class QuanLySP {
         TextField txtGiaSP = new TextField();
         Label labelSoLuongSP = new Label("Số Lượng:");
         TextField txtSoLuongSP = new TextField();
-        Label labelMaKH = new Label("Mã Khách Hàng:");
-        TextField txtMaKH = new TextField();
         Button btnLuu = new Button("Lưu");
         Button btnLuuDH = new Button("Lưu Đơn Hàng");
 
@@ -45,12 +43,11 @@ public class QuanLySP {
             String tenSP = txtTenSP.getText();
             String giaSP = txtGiaSP.getText();
             String soLuong = txtSoLuongSP.getText();
-            String maKH = txtMaKH.getText();
 
-            if (maSP.isEmpty() || tenSP.isEmpty() || giaSP.isEmpty() || soLuong.isEmpty() || maKH.isEmpty()) {
+            if (maSP.isEmpty() || tenSP.isEmpty() || giaSP.isEmpty() || soLuong.isEmpty()) {
                 showAlert("Nhập không thành công");
             } else {
-                LuuTruSP.luuThongTinSP(maSP, tenSP, giaSP, soLuong, maKH);
+                LuuTruSP.luuThongTinSP(maSP, tenSP, giaSP, soLuong);
                 showAlert("Nhập thành công!");
                 
             }
@@ -63,31 +60,31 @@ public class QuanLySP {
             // Thêm các trường nhập mã đơn hàng và mã khách hàng
             Label labelMaDH = new Label("Mã Đơn Hàng:");
             TextField txtMaDH = new TextField();
-            Label labelMaKH_DH = new Label("Mã Khách Hàng:");
-            TextField txtMaKH_DH = new TextField();
+            Label labelMaKH = new Label("Mã Khách Hàng:");
+            TextField txtMaKH =  new TextField();
 
             Button btnLuuDonHang = new Button("Lưu Đơn Hàng");
 
             btnLuuDonHang.setOnAction(e -> {
                 String maDH = txtMaDH.getText();
-                String maKH_DH = txtMaKH_DH.getText();
+                String maKH = txtMaKH.getText();
              
-                if (maDH.isEmpty() || maKH_DH.isEmpty()) {
+                if (maDH.isEmpty() || maKH.isEmpty()) {
                     showAlert("Vui lòng nhập đầy đủ mã đơn hàng và mã khách hàng");
                 } else {
                     
 	
 					// Xử lý lưu đơn hàng với mã đơn hàng và mã khách hàng
-                    LuuTru.luuThongTinDH(maDH, maKH_DH);
-                    showAlert("Lưu đơn hàng thành công!\nMã Đơn Hàng: " + maDH + "\nMã Khách Hàng: " + maKH_DH );
+                    LuuTru.luuThongTinDH(maDH, maKH);
+                    showAlert("Lưu đơn hàng thành công!\nMã Đơn Hàng: " + maDH + "\nMã Khách Hàng: " + maKH);
                     vbox.getChildren().clear();
                 }
             });
 
-            vbox.getChildren().addAll(labelMaDH, txtMaDH, labelMaKH_DH, txtMaKH_DH, btnLuuDonHang);
+            vbox.getChildren().addAll(labelMaDH, txtMaDH, labelMaKH, txtMaKH, btnLuuDonHang);
         });
 
-        vbox.getChildren().addAll(labelMaSP, txtMaSP, labelTenSP, txtTenSP, labelGiaSP, txtGiaSP, labelSoLuongSP, txtSoLuongSP,labelMaKH, txtMaKH, btnLuu, btnLuuDH);
+        vbox.getChildren().addAll(labelMaSP, txtMaSP, labelTenSP, txtTenSP, labelGiaSP, txtGiaSP, labelSoLuongSP, txtSoLuongSP, btnLuu, btnLuuDH);
     }
 
     private static void showAlert(String message) {
