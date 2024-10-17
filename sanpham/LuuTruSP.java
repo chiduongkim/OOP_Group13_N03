@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class LuuTruSP {
-    public static void luuThongTinSP(String maSP, String tenSP, String giaSP, String soLuong, String maKH) {
+    public static void luuThongTinSP(String maSP, String tenSP, String giaSP, String soLuong) {
         String host = "mysql-e4643ae-group13.i.aivencloud.com";
         String port = "13698";
         String databaseName = "defaultdb";
@@ -20,13 +20,12 @@ public class LuuTruSP {
                     userName, 
                     password);
                  PreparedStatement preparedStatement = connection.prepareStatement(
-                         "INSERT INTO sanpham (maSP, tenSP, giaSP, soluong, maKH) VALUES (?, ?, ?, ?, ?)")) {
+                         "INSERT INTO sanpham (maSP, tenSP, giaSP, soluong) VALUES (?, ?, ?, ?)")) {
 
                 preparedStatement.setString(1, maSP);
                 preparedStatement.setString(2, tenSP);
                 preparedStatement.setDouble(3, Double.parseDouble(giaSP));
                 preparedStatement.setInt(4, Integer.parseInt(soLuong));
-                preparedStatement.setString(5, maKH);
 
                 int rowsInserted = preparedStatement.executeUpdate();
 
