@@ -1,0 +1,19 @@
+CREATE TABLE sanpham (
+    maSP VARCHAR(20) PRIMARY KEY,
+    tenSP VARCHAR(100) NOT NULL,
+    giaSP DECIMAL(10, 2) NOT NULL,
+    soLuong INT NOT NULL
+);
+CREATE TABLE donhang (
+    maDH VARCHAR(20) PRIMARY KEY,
+    tenKH VARCHAR(100) NOT NULL,
+    ngayTao DATE NOT NULL
+);
+CREATE TABLE order_product (
+    order_id VARCHAR(20),
+    product_id VARCHAR(20),
+    quantity INT NOT NULL,
+    PRIMARY KEY (order_id, product_id),
+    FOREIGN KEY (order_id) REFERENCES donhang(maDH) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES sanpham(maSP) ON DELETE CASCADE
+);
