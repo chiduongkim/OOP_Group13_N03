@@ -1,0 +1,27 @@
+package snippet;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class OrderManagementScene {
+
+    private Stage stage;
+
+    public OrderManagementScene(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void show() {
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(
+                new Button("Thêm đơn hàng"),
+                new Button("Sửa đơn hàng"),
+                new Button("Xóa đơn hàng")
+        );
+        Scene scene = new Scene(layout, 600, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
+}
